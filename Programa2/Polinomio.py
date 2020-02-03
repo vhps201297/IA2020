@@ -1,12 +1,4 @@
 from fractions import Fraction
-def mcd(a,b):
-    #   assert type(a) == int and type(b) == int and a>0 and b>0
-    if a%b != 0:
-        print("return mcd: ", mcd(b,a%b))
-        return mcd(b,a%b)
-    else:
-        print("return b: ", b)
-        return b
 
 class polynomial():
     
@@ -36,19 +28,27 @@ class polynomial():
     @property
     def integral(self):
         integral_v = []
-        vector_rev = self.expression[::-1]
+        vector_rev= self.expression[::-1]
         for term in range(len(vector_rev)):
-            integral_v.append(str(Fraction(str(vector_rev[term])+ "/" + str(term + 1))))
+            integral_v.append(str(Fraction(str(vector_rev[term]) + "/" + str(term + 1))))
         integral_v.insert(0, '0')
         return integral_v[::-1]
 
+    @property
+    def integral_pp(self):
+        vector_rev = self.integral[::-1]
+        pretty_printing = ''
+        for term in range(len(vector_rev)-1, -1, -1):
+            pretty_printing += "(" + str(vector_rev[term]) + ")" +"x^" + str(term) + " + "
+        return pretty_printing[:-3]
 
 # términos del polinomio
-terms = [8,0]
+terms = [3,3,2,5]
 polinomio = polynomial()
 polinomio.expression = terms
 
 print("\npolinomio: ", polinomio.expression)
 print("grado del polinomio: ", polinomio.degree)
 print("derivada: ", polinomio.derivative)
-print("integral: ", polinomio.integral, "\n")
+print("integral (vector): ", polinomio.integral)
+print("integral (polinomio): ", polinomio.integral_pp, "\n")
