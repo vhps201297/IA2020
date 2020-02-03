@@ -17,18 +17,18 @@ class polynomial():
 
     @property
     def derivative(self):
-        # menos_uno = self.expr[:len(self.expr) - 2]
-        # menos_uno = [term -1 for term in menos_uno]
-        derivative_v = [term -1 for term in self.expr[:-2]]
-        derivative_v.append(self.expr[-2])
-        return derivative_v
+        der = []
+        vector_rev = self.expression[::-1]
+        for term in range(1, len(vector_rev)):
+            der.append(vector_rev[term] * term)
+        return der[::-1]
 
 # términos del polinomio
-terminos = [35,6,2,1,9]
+terms = [7,9,2,1,9]
 # se instancia polinomio
 polinomio = polynomial()
-polinomio.expression = terminos
+polinomio.expression = terms
 
-print("\npolinomio: ", polinomio.expr)
+print("\npolinomio: ", polinomio.expression)
 print("grado del polinomio: ", polinomio.degree)
 print("derivada: ", polinomio.derivative, "\n")
