@@ -3,35 +3,59 @@ import math
 
 class Vector:
 
-	def __init__(self):
-		self.content = []
+    def __init__(self):
+        self.content = []
 
-	def setContent(self,datos):
-		self.content = datos
+    def get_content(self):
+        return self.content
 
-	def size(self):
-		return len(self.content)
+    def setContent(self,datos):
+        self.content = datos
 
-	def suma_vector(self, vector):
-		vector2 = vector
-		vectorSuma = []
-		for i in range(0,len(self.content)):
-			val = self.content[i] + vector2[i]
-			vectorSuma.append(val)
-		return vectorSuma
+    def size(self):
+        return len(self.content)
 
-	def resta_vector(self, vector):
-		vector2 = vector
-		vectorRes = []
-		for i in range(0,len(self.content)):
-			val = self.content[i] - vector2[i]
-			vectorRes.append(val)
-		return vectorRes
+    def suma_vector(self, vector):
+        vector2 = vector
+        vectorSuma = []
+        for i in range(0,len(self.content)):
+            val = self.content[i] + vector2[i]
+            vectorSuma.append(val)
+        return vectorSuma
 
-	def productor_por_escalar(self, escalar):
-		for i in range(0, len(self.content)):
-			self.content[i] *= escalar
-		return self.content 
+    def resta_vector(self, vector):
+        vector2 = vector
+        vectorRes = []
+        for i in range(0,len(self.content)):
+            val = self.content[i] - vector2[i]
+            vectorRes.append(val)
+        return vectorRes
+
+    def productor_por_escalar(self, escalar):
+        for i in range(0, len(self.content)):
+            self.content[i] *= escalar
+        return self.content 
+
+    def producto_punto(self, vector):
+        suma = 0
+        lista_tmp = [vector[i]*self.content[i] for i in range(len(vector))]
+        for j in range(len(lista_tmp)):
+            suma += lista_tmp[j]
+        return suma
+
+    def norma(self):
+        suma = 0
+        for i in range(len(self.content)):
+            suma += self.content[i]**2
+        return math.sqrt(suma)
+
+    def angulo_vector(self, vector):
+        norma1 = self.norma()
+        norma2 = vector.norma()
+        prod_punto = self.producto_punto(vector.get_content())
+        angcos = math.acos(prod_punto/(norma1 * norma2))
+        return math.degrees(angcos)
+
 
 def suma():
 
@@ -40,25 +64,25 @@ def suma():
     tit = " Suma de vectores "
     #Instancia del vector, se inicia un vector vacío
     vector = Vector()
-	#Pedir datos de los vectores al usuario
+    #Pedir datos de los vectores al usuario
     lista1 = []
     lista2 = []
     #os.system("clear")
-	#os.system("cls")
+    #os.system("cls")
     print("\n",tit.center(80,"="),"\n")
     datos_suma = int ( input ("\n Ingrese el tamaño que tienen ambos vectores: ") )
 
-	#llenado del primer vector
+    #llenado del primer vector
     print ("\n",v1.center(80,"="),"\n")
     for i in range (datos_suma):
-	    elemento1 = int ( input (" Ingrese elemento: ") )
-	    lista1.append(elemento1)
-	
+        elemento1 = int ( input (" Ingrese elemento: ") )
+        lista1.append(elemento1)
+    
     #llenado del segundo vector
     print ("\n",v2.center(80,"="),"\n")
     for i in range (datos_suma):
-	    elemento2 = int ( input (" Ingrese elemento: ") )
-	    lista2.append(elemento2)
+        elemento2 = int ( input (" Ingrese elemento: ") )
+        lista2.append(elemento2)
 
     #Se establece el vector inicial
     vector.setContent(lista1)
@@ -74,27 +98,27 @@ def resta():
     v1 = " Llenado del primer vector "
     v2 = " Llenado del segundo vector "
     tit = " Resta de vectores "
-	#Instancia del vector, se inicia como vacío
+    #Instancia del vector, se inicia como vacío
     vector = Vector()
-	#Pedir datos de los vectores al usuario
+    #Pedir datos de los vectores al usuario
     lista1 = []
     lista2 = []
     #os.system("clear")
-	#os.system("cls")
+    #os.system("cls")
     print("\n",tit.center(80,"="),"\n")
     datos_resta = int ( input (" Ingrese el tamaño que tienen ambos vectores: ") )
-	
-	#llenado del primer vector
+    
+    #llenado del primer vector
     print ("\n ",v1.center(80,"="),"\n")
     for i in range (datos_resta):
-    	elemento1 = int ( input (" Ingrese elemento: ") )
-    	lista1.append(elemento1)
+        elemento1 = int ( input (" Ingrese elemento: ") )
+        lista1.append(elemento1)
     
-	#llenado del segundo vector
+    #llenado del segundo vector
     print ("\n ",v2.center(80,"="),"\n")
     for i in range (datos_resta):
-    	elemento2 = int ( input (" Ingrese elemento: ") )
-    	lista2.append(elemento2)
+        elemento2 = int ( input (" Ingrese elemento: ") )
+        lista2.append(elemento2)
     #Se establece el vector inicial
     vector.setContent(lista1)
     vector_resta = vector.resta_vector(lista2)
@@ -109,28 +133,23 @@ def norma():
     v1 = " Llenado del vector "
     tit = " Norma de un vector "
     lista1 = []
-    lista1_temp = []
+    #lista1_temp = []
     #os.system("clear")
-	#os.system("cls")
+    #os.system("cls")
     print("\n",tit.center(80,"="),"\n")
     tam = int ( input (" Ingrese el tamaño del vector: ") )
-	
-	#llenado del vector
+    
+    #llenado del vector
     print ("\n ",v1.center(80,"="),"\n")
     for i in range (tam):
-	    elemento1 = int ( input (" Ingrese elemento: ") )
-	    lista1.append(elemento1)
-    lista1_temp = lista1[:]
-    print(" El vector ingresado es: ",lista1_temp)
+        elemento1 = int ( input (" Ingrese elemento: ") )
+        lista1.append(elemento1)
+    
+    print(" El vector ingresado es: ",lista1)
     #Elevando al cuadrado cada uno de los elementos del vector
-    lista1_lista1 = [lista1[i]*lista1[i] for i in range(len(lista1))]
-    #sumando todos los elementos del vector
-    suma = 0
-    for i in range(0,len(lista1)):
-        suma = suma + lista1_lista1[i]
-    #Sacar la raiz cuadrada de la suma anterior, para obtener la norma
-    norm = math.sqrt(suma)
-    print("\n ----- La norma del vector es: ", norm,"-----")
+    vector = Vector()
+    vector.setContent(lista1)
+    print("\n ----- La norma del vector es: ", vector.norma(),"-----")
     print ("\n 1. Ir al menú principal\n 2. Salir")
     eleccion()
 
@@ -140,15 +159,15 @@ def multiplicacion():
     lista1 = []
     vector = Vector()
     #os.system("clear")
-	#os.system("cls")
+    #os.system("cls")
     print("\n",tit.center(80,"="),"\n")
     datos_suma = int ( input (" Ingrese el tamaño del vector: ") )
 
-	#llenado del vector
+    #llenado del vector
     print ("\n",v1.center(80,"="),"\n")
     for i in range (datos_suma):
-	    elemento1 = int ( input (" Ingrese elemento: ") )
-	    lista1.append(elemento1)
+        elemento1 = int ( input (" Ingrese elemento: ") )
+        lista1.append(elemento1)
     print ("\n El vector ingresado es: ",lista1)
     escalar = int ( input("\n Ingrese el escalar por el que se va a multiplicar el vector: ") )
     vector.setContent(lista1)
@@ -162,60 +181,34 @@ def angulo():
     v1 = " Llenado del primer vector "
     v2 = " Llenado del segundo vector "
     tit = " Ángulo entre dos vectores "
+    vector = Vector()
+    vector2 = Vector()
     lista1 = []
     lista2 = []
-    lista1_temp = []
-    lista2_temp = []
-    vector = Vector()
     #os.system("clear")
-	#os.system("cls")
+    #os.system("cls")
     print("\n",tit.center(80,"="),"\n")
     tam = int ( input (" Ingrese el tamaño del vector: ") )
-	
-	#llenado del primer vector
+    
+    #llenado del primer vector
     print ("\n ",v1.center(80,"="),"\n")
     for i in range (tam):
-	    elemento1 = int ( input (" Ingrese elemento: ") )
-	    lista1.append(elemento1)
+        elemento1 = int ( input (" Ingrese elemento: ") )
+        lista1.append(elemento1)
     #Hacemos una copia de la lista 1
-    lista1_temp = lista1[:]
     
+    vector.setContent(lista1)
     #llenado del segundo vector
     print ("\n ",v2.center(80,"="),"\n")
     for i in range (tam):
-	    elemento2 = int ( input (" Ingrese elemento: ") )
-	    lista2.append(elemento2)
+        elemento2 = int ( input (" Ingrese elemento: ") )
+        lista2.append(elemento2)
     #Hacemos una copia de la lista 2
-    lista2_temp = lista2[:]
-
+    vector2.setContent(lista2)
     print("\n El primer vector es: ", lista1)
     print(" El segundo vector es: ", lista2)
-
-    #multiplicar elemento a elemento los vectores (producto punto)
-    lista1_lista2 = [lista1[i]*lista2[i] for i in range(len(lista1))]
-
-    #sumar los elementos
-    prod_punto = 0
-    for i in range(0,tam):
-        prod_punto = prod_punto + lista1_lista2[i]
-
-    #Sacar la norma de cada vector
-    #Vector 1
-    norma_lista1 = [lista1[i]*lista1[i] for i in range(len(lista1))]
-    suma = 0
-    for i in range(0,tam):
-        suma = suma + norma_lista1[i]
-    norma1 = math.sqrt(suma)
-
-    #Vector 2
-    norma_lista2 = [lista2[i]*lista2[i] for i in range(len(lista2))]
-    suma2 = 0
-    for i in range(0,tam):
-        suma2 = suma2 + norma_lista2[i]
-    norma2 = math.sqrt(suma2)
-
-    ang = math.acos((prod_punto)/(norma1*norma2))
-    print("\n ----- El ángulo entre los dos vectores es: ", math.degrees(ang),"-----")
+    
+    print("\n ----- El ángulo entre los dos vectores es: ", vector.angulo_vector(vector2),"-----")
     print ("\n 1. Ir al menú principal\n 2. Salir")
     eleccion()
 
@@ -280,7 +273,7 @@ def eleccion():
         except ValueError:
             input (" Caracter inválido. \nPresione una tecla para continuar...")
             #os.system("clear")
-	        #os.system("cls")
+            #os.system("cls")
             print ("\n 1. Ir al menú principal\n 2. Salir")
 
 caratula()
