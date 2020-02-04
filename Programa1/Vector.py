@@ -32,7 +32,7 @@ class Vector:
 
 		return self.content 
 
-	def raiz(numero):
+	def raiz(self, numero):
 		#numero=float(input("Ingrese numero: "))
 		numero=numero * 1.0
 		if numero>=0:
