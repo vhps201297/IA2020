@@ -56,7 +56,7 @@ class polynomial():
 
 
 # términos del polinomio
-terms = [3,3,2,5]
+terms = [4,3,2,1]
 polinomio = polynomial()
 polinomio.expression = terms
 polinomio_exp = polinomio.expression
@@ -64,9 +64,9 @@ derivative = polinomio.derivative
 integral = polinomio.integral
 
 # print("\npolinomio (vector): ", polinomio_exp)
-print("\npolinomio: ", polinomio.pretty_printing(polinomio_exp), "\n")
-print("grado del polinomio: ", polinomio.degree, "\n")
+# print("\npolinomio: ", polinomio.pretty_printing(polinomio_exp), "\n")
+# print("grado del polinomio: ", polinomio.degree, "\n")
 # print("derivada (vector): ", derivative)
-print("derivada (polinomio): ", polinomio.pretty_printing(derivative), "\n")
+# print("derivada (polinomio): ", polinomio.pretty_printing(derivative), "\n")
 # print("integral (vector): ", integral)
-print("integral (polinomio): ", polinomio.pretty_printing(integral), "+ c\n")
+# print("integral (polinomio): ", polinomio.pretty_printing(integral), "+ c\n")
