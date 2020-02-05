@@ -174,8 +174,6 @@ def angulo():
     tit = " Ángulo entre dos vectores "
     vector = Vector()
     vector2 = Vector()
-    lista1 = []
-    lista2 = []
     os.system("clear")
     #os.system("cls")
     print("\n",tit.center(80,"="),"\n")
@@ -183,17 +181,13 @@ def angulo():
     
     #llenado del primer vector
     print ("\n ",v1.center(80,"="),"\n")
-    for i in range (tam):
-        elemento1 = int ( input (" Ingrese elemento: ") )
-        lista1.append(elemento1)
+    lista1 = llenar_lista(tam)
     #Hacemos una copia de la lista 1
     
     vector.setContent(lista1)
     #llenado del segundo vector
     print ("\n ",v2.center(80,"="),"\n")
-    for i in range (tam):
-        elemento2 = int ( input (" Ingrese elemento: ") )
-        lista2.append(elemento2)
+    lista2 = llenar_lista(tam)
     #Hacemos una copia de la lista 2
     vector2.setContent(lista2)
     print("\n El primer vector es: ", lista1)
