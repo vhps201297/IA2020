@@ -6,15 +6,16 @@ class Vector:
     def __init__(self):
         self.content = []
 
+    # retorna el contenfido del vector
     def get_content(self):
         return self.content
 
+    # establece la lista del vector
     def setContent(self,datos):
         self.content = datos
 
-    def size(self):
-        return len(self.content)
-
+    # Regresa la suma del vector instanciado mas 
+    # el vector que se ingresa en el parámetro.
     def suma_vector(self, vector):
         vector2 = vector
         vectorSuma = []
@@ -23,6 +24,8 @@ class Vector:
             vectorSuma.append(val)
         return vectorSuma
 
+    # Regresa la resta del vector instanciado menos 
+    # el vector que se ingresa dentro del parámetro.
     def resta_vector(self, vector):
         vector2 = vector
         vectorRes = []
@@ -31,11 +34,16 @@ class Vector:
             vectorRes.append(val)
         return vectorRes
 
+    # Regresa el vector instanciado pero con los valores multiplicados 
+    # por el valor escalar.
     def productor_por_escalar(self, escalar):
         for i in range(0, len(self.content)):
             self.content[i] *= escalar
         return self.content 
 
+    # Para el producto punto de dos vectores se crea un vector con el producto
+    # de los valores en cada índice del vector instanciado y el segundo vector,
+    # por último se suma los valores del nuevo vector y se manda como resultado.
     def producto_punto(self, vector):
         suma = 0
         lista_tmp = [vector[i]*self.content[i] for i in range(len(vector))]
@@ -43,19 +51,23 @@ class Vector:
             suma += lista_tmp[j]
         return suma
 
+    # Para la norma o longitud del vector, se determinó con la siguiente formula:
+    # sqrt((x^2)+(y^2)+...+(n^2)) 
     def norma(self):
         suma = 0
         for i in range(len(self.content)):
             suma += self.content[i]**2
         return math.sqrt(suma)
 
+    # Para poder cálcular el angulo entre vectores se ocupó la siguiente fórmula:
+    # theta = angCos((A·B)/(|A||B|)) sin embargo el resultado lo obtenemos en radianes,
+    # para obtenerlo en grados se ocupó el método "degrees()".
     def angulo_vector(self, vector):
         norma1 = self.norma()
         norma2 = vector.norma()
         prod_punto = self.producto_punto(vector.get_content())
         angcos = math.acos(prod_punto/(norma1 * norma2))
         return math.degrees(angcos)
-
 
 def suma():
 
@@ -65,24 +77,18 @@ def suma():
     #Instancia del vector, se inicia un vector vacío
     vector = Vector()
     #Pedir datos de los vectores al usuario
-    lista1 = []
-    lista2 = []
-    #os.system("clear")
+    os.system("clear")
     #os.system("cls")
     print("\n",tit.center(80,"="),"\n")
     datos_suma = int ( input ("\n Ingrese el tamaño que tienen ambos vectores: ") )
 
     #llenado del primer vector
     print ("\n",v1.center(80,"="),"\n")
-    for i in range (datos_suma):
-        elemento1 = int ( input (" Ingrese elemento: ") )
-        lista1.append(elemento1)
+    lista1 = llenar_lista(datos_suma)
     
     #llenado del segundo vector
     print ("\n",v2.center(80,"="),"\n")
-    for i in range (datos_suma):
-        elemento2 = int ( input (" Ingrese elemento: ") )
-        lista2.append(elemento2)
+    lista2 = llenar_lista(datos_suma)
 
     #Se establece el vector inicial
     vector.setContent(lista1)
@@ -92,8 +98,8 @@ def suma():
     print (" El segundo vector es: ",lista2)
     print ("\n ----- El vector suma es: ",vector_suma, "-----")
     print ("\n ¿Qué desea hacer?\n 1. Ir al menú principal\n 2. Salir")
-    eleccion()
-    
+    eleccion() 
+
 def resta():
     v1 = " Llenado del primer vector "
     v2 = " Llenado del segundo vector "
@@ -101,24 +107,16 @@ def resta():
     #Instancia del vector, se inicia como vacío
     vector = Vector()
     #Pedir datos de los vectores al usuario
-    lista1 = []
-    lista2 = []
-    #os.system("clear")
+    os.system("clear")
     #os.system("cls")
     print("\n",tit.center(80,"="),"\n")
     datos_resta = int ( input (" Ingrese el tamaño que tienen ambos vectores: ") )
-    
     #llenado del primer vector
-    print ("\n ",v1.center(80,"="),"\n")
-    for i in range (datos_resta):
-        elemento1 = int ( input (" Ingrese elemento: ") )
-        lista1.append(elemento1)
-    
+    print ("\n",v1.center(80,"="),"\n")
+    lista1 = llenar_lista(datos_resta)
     #llenado del segundo vector
-    print ("\n ",v2.center(80,"="),"\n")
-    for i in range (datos_resta):
-        elemento2 = int ( input (" Ingrese elemento: ") )
-        lista2.append(elemento2)
+    print ("\n",v2.center(80,"="),"\n")
+    lista2 = llenar_lista(datos_resta)
     #Se establece el vector inicial
     vector.setContent(lista1)
     vector_resta = vector.resta_vector(lista2)
@@ -132,18 +130,14 @@ def resta():
 def norma():
     v1 = " Llenado del vector "
     tit = " Norma de un vector "
-    lista1 = []
-    #lista1_temp = []
-    #os.system("clear")
+    os.system("clear")
     #os.system("cls")
     print("\n",tit.center(80,"="),"\n")
     tam = int ( input (" Ingrese el tamaño del vector: ") )
     
     #llenado del vector
     print ("\n ",v1.center(80,"="),"\n")
-    for i in range (tam):
-        elemento1 = int ( input (" Ingrese elemento: ") )
-        lista1.append(elemento1)
+    lista1 = llenar_lista(tam)
     
     print(" El vector ingresado es: ",lista1)
     #Elevando al cuadrado cada uno de los elementos del vector
@@ -156,18 +150,15 @@ def norma():
 def multiplicacion():
     v1 = " Llenado del vector "
     tit = " Multiplicación por un escalar "
-    lista1 = []
     vector = Vector()
-    #os.system("clear")
+    os.system("clear")
     #os.system("cls")
     print("\n",tit.center(80,"="),"\n")
     datos_suma = int ( input (" Ingrese el tamaño del vector: ") )
 
     #llenado del vector
     print ("\n",v1.center(80,"="),"\n")
-    for i in range (datos_suma):
-        elemento1 = int ( input (" Ingrese elemento: ") )
-        lista1.append(elemento1)
+    lista1 = llenar_lista(datos_suma)
     print ("\n El vector ingresado es: ",lista1)
     escalar = int ( input("\n Ingrese el escalar por el que se va a multiplicar el vector: ") )
     vector.setContent(lista1)
@@ -185,7 +176,7 @@ def angulo():
     vector2 = Vector()
     lista1 = []
     lista2 = []
-    #os.system("clear")
+    os.system("clear")
     #os.system("cls")
     print("\n",tit.center(80,"="),"\n")
     tam = int ( input (" Ingrese el tamaño del vector: ") )
@@ -230,12 +221,13 @@ def caratula():
     input("\n\n\nPresione una tecla para continuar...")
 
 def main():
-    #os.system("clear")
+    os.system("clear")
     #os.system("cls")
     print ("\n\t\t---------- Operaciones con vectores ----------")
     print (" 1. Suma \n 2. Resta \n 3. Norma")
     print (" 4. Multiplicación por un escalar")
     print (" 5. Ángulo entre dos vectores")
+    print (" 6. Salir")
     while True:
         try:
             opcion = int (input ("\n Elija una opción: "))
@@ -247,8 +239,11 @@ def main():
                 norma()
             elif(opcion == 4):
                 multiplicacion()
-            elif (opcion == 5):
+            elif(opcion == 5):
                 angulo()
+            elif(opcion == 6):
+                return input("Saliendo...")
+                break
             else:
                 input (" Opción inválida, inténtelo de nuevo.\n Presione una tecla para continuar... ")
                 main()
@@ -264,7 +259,7 @@ def eleccion():
             if (elecc == 1):
                 main()
             elif(elecc == 2):
-                return input("Gracias por usar")
+                return input("Saliendo...")
                 break
             else:
                 print (" Opción incorrecta")
@@ -275,6 +270,13 @@ def eleccion():
             #os.system("clear")
             #os.system("cls")
             print ("\n 1. Ir al menú principal\n 2. Salir")
+
+def llenar_lista(tam):
+    lista_tmp = []
+    for i in range (tam):
+        elemento2 = int ( input (" Ingrese elemento: ") )
+        lista_tmp.append(elemento2)
+    return lista_tmp
 
 caratula()
 main()
